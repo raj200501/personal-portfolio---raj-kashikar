@@ -1,24 +1,24 @@
-vCard - Personal Portfolio
+Raj Kashikar - Personal Portfolio
 
 # sidebar
 
-alt = Richard hanrick
-Richard hanrick
-Web developer
+alt = Raj Kashikar
+Raj Kashikar
+
 
 Show Contacts
 
 Email
-richard@example.com
+rajskashikar@gmail.com
 
 Phone
-+1 (213) 352-2795
+(925) 436-9249
 
 Birthday
-June 23, 1982
+September 7, 2005
 
 Location
-Sacramento, California, USA
+San Ramon, California, USA
 
 # navbar
 
