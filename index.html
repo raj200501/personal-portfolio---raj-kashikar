@@ -166,19 +166,19 @@
         <ul class="navbar-list">
 
           <li class="navbar-item">
-            <button class="navbar-link active" data-nav-link>About</button>
+            <button class="navbar-link active" data-nav-link data-target="about">About</button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
+            <button class="navbar-link" data-nav-link data-target="resume">Resume</button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Projects</button>
+            <button class="navbar-link" data-nav-link data-target="projects">Projects</button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
+            <button class="navbar-link" data-nav-link data-target="contact">Contact</button>
           </li>
 
         </ul>
@@ -537,7 +537,7 @@
           <ul class="project-list">
 
             <li class="project-item active" data-filter-item data-category="AI Research">
-              <a href="#">
+              <a href="https://github.com/raj200501?tab=repositories" target="_blank">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -555,7 +555,7 @@
             </li>
 
             <li class="project-item active" data-filter-item data-category="AI Research">
-              <a href="#">
+              <a href="https://github.com/raj200501?tab=repositories" target="_blank">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -573,7 +573,7 @@
             </li>
 
             <li class="project-item active" data-filter-item data-category="AI Research">
-              <a href="#">
+              <a href="https://github.com/raj200501?tab=repositories" target="_blank">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -591,7 +591,7 @@
             </li>
 
             <li class="project-item active" data-filter-item data-category="Mobile Apps">
-              <a href="#">
+              <a href="https://github.com/raj200501?tab=repositories" target="_blank">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -671,6 +671,32 @@
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!--
+    - custom JavaScript for section navigation
+  -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const navLinks = document.querySelectorAll("[data-nav-link]");
+      const pages = document.querySelectorAll("[data-page]");
+
+      navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          navLinks.forEach(nav => nav.classList.remove("active"));
+          link.classList.add("active");
+
+          const target = link.getAttribute("data-target");
+          pages.forEach(page => {
+            if (page.getAttribute("data-page") === target) {
+              page.classList.add("active");
+            } else {
+              page.classList.remove("active");
+            }
+          });
+        });
+      });
+    });
+  </script>
 
 </body>
 
