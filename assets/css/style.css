@@ -335,6 +335,16 @@ main {
   background: var(--bg-gradient-onyx);
   border-radius: 20px;
 }
+/* Glowing effect for the avatar image */
+.avatar-box img {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.avatar-box img:hover {
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); /* Glowing gold effect */
+  transform: scale(1.1); /* Slightly enlarge the image on hover */
+}
+
 
 .info-content .name {
   color: var(--white-2);
