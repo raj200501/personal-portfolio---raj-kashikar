@@ -1236,11 +1236,15 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 /* --- Resume Company Names --- */
 .company-name {
-  font-size: 1.2em;     /* make larger */
-  font-weight: 600;     /* semi-bold */
-  color: #000;          /* black (or pick a theme color) */
+  font-size: 1.15em;
+  font-weight: 700;
+  color: #1a1a1a;                /* rich black/gray */
+  letter-spacing: 0.2px;
   display: inline-block;
-  margin-bottom: 4px;   /* adds a little space below */
+  margin-bottom: 3px;
+
+  /* subtle glow */
+  text-shadow: 0 0 3px rgba(0,0,0,0.15);
 }
 
 
