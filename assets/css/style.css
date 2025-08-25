@@ -1234,6 +1234,14 @@ textarea.form-input::-webkit-resizer { display: none; }
 .form-btn:disabled:hover::before { background: var(--bg-gradient-jet); }
 
 
+/* --- Resume Company Names --- */
+.company-name {
+  font-size: 1.2em;     /* make larger */
+  font-weight: 600;     /* semi-bold */
+  color: #000;          /* black (or pick a theme color) */
+  display: inline-block;
+  margin-bottom: 4px;   /* adds a little space below */
+}
 
 
 
