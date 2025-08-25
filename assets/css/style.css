@@ -1236,7 +1236,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 /* --- Resume Company Names --- */
 .company-name {
-  font-size: 1.15em;
+  font-size: 1.3em;
   font-weight: 700;
   color: #1a1a1a;                /* rich black/gray */
   letter-spacing: 0.2px;
