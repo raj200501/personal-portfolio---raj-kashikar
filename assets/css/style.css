@@ -222,11 +222,24 @@ article {
 }
 
 article {
-  display: none;
+  /* Use absolute positioning and visibility instead of display: none 
+     to prevent Spline/WebGL from losing its context or zeroing dimensions */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 0;
 }
 
 article.active {
-  display: block;
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  z-index: 1;
   animation: fade 0.5s ease backwards;
 }
 
