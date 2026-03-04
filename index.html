@@ -43,6 +43,16 @@
       background: hsl(0, 0%, 7%);
       /* keeping original fallback */
     }
+
+    /* Make the robot slightly transparent so it doesn't distract from text */
+    spline-viewer {
+      opacity: 0.8;
+    }
+
+    /* Hide the Spline watermark */
+    spline-viewer::part(logo) {
+      display: none !important;
+    }
   </style>
   <div class="spline-background">
     <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"

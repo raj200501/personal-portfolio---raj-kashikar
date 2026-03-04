@@ -167,8 +167,10 @@ body { background: var(--smoky-black); }
 
 .sidebar,
 article {
-  background: var(--eerie-black-2);
-  border: 1px solid var(--jet);
+  background: hsla(240, 2%, 12%, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid hsla(0, 0%, 100%, 0.08); /* More subtle border for glass effect */
   border-radius: 20px;
   padding: 15px;
   box-shadow: var(--shadow-1);
