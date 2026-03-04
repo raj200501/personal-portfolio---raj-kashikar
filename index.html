@@ -26,103 +26,133 @@
 </head>
 
 <body>
-  <!-- import map for three.js -->
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+  <!-- Flow Field Neural Background -->
+  <canvas id="neural-canvas"
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; background: #000; pointer-events: none;"></canvas>
+  <script>
+    const canvas = document.getElementById("neural-canvas");
+    const ctx = canvas.getContext("2d");
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let particles = [];
+    let animationFrameId;
+    let mouse = { x: -1000, y: -1000 };
+
+    // Configuration
+    const color = "#818cf8"; // Indigo-400
+    const trailOpacity = 0.1;
+    const particleCount = 600;
+    const speed = 0.8;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = 0;
+        this.vy = 0;
+        this.age = 0;
+        this.life = Math.random() * 200 + 100;
+      }
+
+      update() {
+        const angle = (Math.cos(this.x * 0.005) + Math.sin(this.y * 0.005)) * Math.PI;
+
+        this.vx += Math.cos(angle) * 0.2 * speed;
+        this.vy += Math.sin(angle) * 0.2 * speed;
+
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const interactionRadius = 150;
+
+        if (distance < interactionRadius) {
+          const force = (interactionRadius - distance) / interactionRadius;
+          this.vx -= dx * force * 0.05;
+          this.vy -= dy * force * 0.05;
+        }
+
+        this.x += this.vx;
+        this.y += this.vy;
+        this.vx *= 0.95;
+        this.vy *= 0.95;
+
+        this.age++;
+        if (this.age > this.life) {
+          this.reset();
+        }
+
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+      }
+
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = 0;
+        this.vy = 0;
+        this.age = 0;
+        this.life = Math.random() * 200 + 100;
+      }
+
+      draw(context) {
+        context.fillStyle = color;
+        const alpha = 1 - Math.abs((this.age / this.life) - 0.5) * 2;
+        context.globalAlpha = alpha;
+        context.fillRect(this.x, this.y, 1.5, 1.5);
       }
     }
-  </script>
-  <!-- Three.js shader background -->
-  <div id="shader-background"
-    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; background: #000; overflow: hidden;">
-  </div>
-  <script type="module">
-    import * as THREE from 'three';
 
-    const container = document.getElementById('shader-background');
+    const init = () => {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.scale(dpr, dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
 
-    // Vertex shader
-    const vertexShader = `
-      void main() {
-        gl_Position = vec4( position, 1.0 );
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
       }
-    `;
-
-    // Fragment shader
-    const fragmentShader = `
-      #define TWO_PI 6.2831853072
-      #define PI 3.14159265359
-
-      precision highp float;
-      uniform vec2 resolution;
-      uniform float time;
-
-      void main(void) {
-        vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
-        float t = time*0.05;
-        float lineWidth = 0.002;
-
-        vec3 color = vec3(0.0);
-        for(int j = 0; j < 3; j++){
-          for(int i=0; i < 5; i++){
-            color[j] += lineWidth*float(i*i) / abs(fract(t - 0.01*float(j)+float(i)*0.01)*5.0 - length(uv) + mod(uv.x+uv.y, 0.2));
-          }
-        }
-        
-        gl_FragColor = vec4(color[0],color[1],color[2],1.0);
-      }
-    `;
-
-    // Initialize Three.js scene
-    const camera = new THREE.Camera();
-    camera.position.z = 1;
-
-    const scene = new THREE.Scene();
-    const geometry = new THREE.PlaneGeometry(2, 2);
-
-    const uniforms = {
-      time: { type: "f", value: 1.0 },
-      resolution: { type: "v2", value: new THREE.Vector2() },
     };
 
-    const material = new THREE.ShaderMaterial({
-      uniforms: uniforms,
-      vertexShader: vertexShader,
-      fragmentShader: fragmentShader,
-    });
-
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
-
-    container.appendChild(renderer.domElement);
-
-    // Handle window resize
-    const onWindowResize = () => {
-      const width = container.clientWidth;
-      const height = container.clientHeight;
-      renderer.setSize(width, height);
-      uniforms.resolution.value.x = renderer.domElement.width;
-      uniforms.resolution.value.y = renderer.domElement.height;
-    };
-
-    // Initial resize
-    onWindowResize();
-    window.addEventListener("resize", onWindowResize, false);
-
-    // Animation loop
     const animate = () => {
-      requestAnimationFrame(animate);
-      uniforms.time.value += 0.05;
-      renderer.render(scene, camera);
+      ctx.fillStyle = `rgba(0, 0, 0, ${trailOpacity})`;
+      ctx.fillRect(0, 0, width, height);
+
+      particles.forEach((p) => {
+        p.update();
+        p.draw(ctx);
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
     };
 
-    // Start animation
+    const handleResize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      init();
+    };
+
+    const handleMouseMove = (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
+
+    init();
     animate();
+
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseleave", handleMouseLeave);
   </script>
 
   <!-- splinetool viewer for the background robot -->
