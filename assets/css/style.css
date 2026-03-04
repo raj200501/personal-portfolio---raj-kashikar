@@ -639,7 +639,7 @@ spline-viewer::part(logo) {
   bottom: 0px;
   right: 0px;
   width: 180px;
-  height: 60px;
+  height: 80px;
   background: var(--bg-gradient-jet);
   z-index: 10;
   border-top-left-radius: 12px;
