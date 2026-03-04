@@ -28,36 +28,7 @@
 <body>
   <!-- splinetool viewer for the background robot -->
   <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.5/build/spline-viewer.js"></script>
-  <style>
-    body {
-      background: transparent !important;
-    }
 
-    .spline-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      background: hsl(0, 0%, 7%);
-      /* keeping original fallback */
-    }
-
-    /* Make the robot slightly transparent so it doesn't distract from text */
-    spline-viewer {
-      opacity: 0.8;
-    }
-
-    /* Hide the Spline watermark */
-    spline-viewer::part(logo) {
-      display: none !important;
-    }
-  </style>
-  <div class="spline-background">
-    <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-      events-target="global"></spline-viewer>
-  </div>
 
   <!--
     - #MAIN
@@ -254,74 +225,82 @@
 
           <h3 class="h3 service-title">What I Do</h3>
 
-          <ul class="service-list">
+          <div class="service-container">
+            <ul class="service-list">
 
-            <li class="service-item">
+              <li class="service-item">
 
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-design.svg" alt="AI Research icon" width="40">
-              </div>
+                <div class="service-icon-box">
+                  <img src="./assets/images/icon-design.svg" alt="AI Research icon" width="40">
+                </div>
 
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">AI Research</h4>
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">AI Research</h4>
 
-                <p class="service-item-text">
-                  Conducting advanced AI research to develop innovative solutions in various domains.
-                </p>
-              </div>
+                  <p class="service-item-text">
+                    Conducting advanced AI research to develop innovative solutions in various domains.
+                  </p>
+                </div>
 
-            </li>
+              </li>
 
-            <li class="service-item">
+              <li class="service-item">
 
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
-              </div>
+                <div class="service-icon-box">
+                  <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
+                </div>
 
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Full Stack Development</h4>
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">Full Stack Development</h4>
 
-                <p class="service-item-text">
-                  High-quality development of software engineering projects with a focus on functionality and improving
-                  user experience.
-                </p>
-              </div>
+                  <p class="service-item-text">
+                    High-quality development of software engineering projects with a focus on functionality and
+                    improving
+                    user experience.
+                  </p>
+                </div>
 
-            </li>
+              </li>
 
-            <li class="service-item">
+              <li class="service-item">
 
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40">
-              </div>
+                <div class="service-icon-box">
+                  <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40">
+                </div>
 
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Mobile Apps</h4>
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">Mobile Apps</h4>
 
-                <p class="service-item-text">
-                  Professional development of applications for iOS and Android.
-                </p>
-              </div>
+                  <p class="service-item-text">
+                    Professional development of applications for iOS and Android.
+                  </p>
+                </div>
 
-            </li>
+              </li>
 
-            <li class="service-item">
+              <li class="service-item">
 
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-photo.svg" alt="Data Engineering icon" width="40">
-              </div>
+                <div class="service-icon-box">
+                  <img src="./assets/images/icon-photo.svg" alt="Data Engineering icon" width="40">
+                </div>
 
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Data Engineering</h4>
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">Data Engineering</h4>
 
-                <p class="service-item-text">
-                  Implementing data engineering solutions to manage and analyze large datasets effectively.
-                </p>
-              </div>
+                  <p class="service-item-text">
+                    Implementing data engineering solutions to manage and analyze large datasets effectively.
+                  </p>
+                </div>
 
-            </li>
+              </li>
 
-          </ul>
+            </ul>
+
+            <div class="service-spline-box">
+              <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                events-target="global"></spline-viewer>
+            </div>
+          </div>
 
         </section>
 
