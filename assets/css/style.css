@@ -638,8 +638,8 @@ spline-viewer::part(logo) {
   position: absolute;
   bottom: 0px;
   right: 0px;
-  width: 180px;
-  height: 80px;
+  width: 220px;
+  height: 100px;
   background: var(--bg-gradient-jet);
   z-index: 10;
   border-top-left-radius: 12px;
