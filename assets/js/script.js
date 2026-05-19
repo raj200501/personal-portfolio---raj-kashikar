@@ -98,6 +98,11 @@ const user = "rajskashikar";
 const domain = "gmail";
 const tld = "com";
 const email = `${user}@${domain}.${tld}`;
+const phoneCountry = "+1";
+const phoneArea = "925";
+const phonePrefix = "436";
+const phoneLine = "9249";
+const phone = `${phoneCountry} (${phoneArea}) ${phonePrefix}-${phoneLine}`;
 
 const pageLoadedAt = Date.now();
 const form = document.querySelector("[data-form]");
@@ -107,6 +112,7 @@ const formStatus = document.querySelector("[data-form-status]");
 const honeypot = document.querySelector("[data-honeypot]");
 const emailCopyBtns = document.querySelectorAll("[data-email-copy]");
 const emailRevealBtns = document.querySelectorAll("[data-email-reveal]");
+const phoneRevealBtns = document.querySelectorAll("[data-phone-reveal]");
 
 const setFormStatus = function (message, tone = "") {
   if (!formStatus) return;
@@ -207,6 +213,13 @@ emailRevealBtns.forEach((button) => {
   button.addEventListener("click", function () {
     this.textContent = email;
     this.setAttribute("aria-label", `Email address ${email}`);
+  });
+});
+
+phoneRevealBtns.forEach((button) => {
+  button.addEventListener("click", function () {
+    this.textContent = phone;
+    this.setAttribute("aria-label", `Phone number ${phone}`);
   });
 });
 

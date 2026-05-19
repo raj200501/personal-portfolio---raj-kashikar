@@ -529,13 +529,16 @@ main {
   font-size: var(--fs-7);
 }
 
-.email-reveal {
+.email-reveal,
+.phone-reveal {
   color: var(--orange-yellow-crayola);
   line-height: 1.4;
 }
 
 .email-reveal:hover,
-.email-reveal:focus-visible {
+.email-reveal:focus-visible,
+.phone-reveal:hover,
+.phone-reveal:focus-visible {
   color: var(--white-2);
 }
 
@@ -575,35 +578,130 @@ main {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: hsla(240, 1%, 17%, 0.75);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--jet);
+  background: linear-gradient(180deg, hsla(240, 2%, 14%, 0.88), hsla(240, 2%, 10%, 0.72));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid hsla(45, 100%, 72%, 0.10);
   border-radius: 12px 12px 0 0;
   box-shadow: var(--shadow-2);
+  overflow: hidden;
   z-index: 5;
 }
 
+.navbar::before {
+  content: "";
+  position: absolute;
+  inset: -45%;
+  background:
+    radial-gradient(circle at 24% 45%, hsla(45, 100%, 72%, 0.16), transparent 27%),
+    radial-gradient(circle at 50% 50%, hsla(38, 100%, 66%, 0.10), transparent 36%),
+    radial-gradient(circle at 78% 42%, hsla(48, 82%, 58%, 0.14), transparent 29%);
+  opacity: 0;
+  transform: scale(0.78);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  pointer-events: none;
+}
+
+.navbar:hover::before,
+.navbar:focus-within::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .navbar-list {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding: 0 10px;
+  gap: 2px;
+  padding: 8px 10px;
 }
 
 .navbar-link {
+  position: relative;
+  display: block;
   color: var(--light-gray);
   font-size: var(--fs-8);
-  padding: 20px 7px;
-  transition: color var(--transition-1);
+  font-weight: var(--fw-500);
+  padding: 0;
+  border-radius: 12px;
+  text-align: center;
+  outline-offset: 3px;
+  transition: color var(--transition-1), transform var(--transition-1);
 }
 
-.navbar-link:hover,
-.navbar-link:focus {
-  color: var(--light-gray-70);
+.navbar-link-shell {
+  position: relative;
+  display: block;
+  border-radius: 12px;
+  overflow: visible;
+  perspective: 600px;
+}
+
+.navbar-link-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: radial-gradient(circle, hsla(45, 100%, 72%, 0.20) 0%, hsla(39, 100%, 64%, 0.08) 48%, transparent 74%);
+  opacity: 0;
+  transform: scale(0.75);
+  filter: blur(1px);
+  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+.navbar-link-face {
+  position: relative;
+  z-index: 1;
+  min-width: 56px;
+  padding: 10px 9px;
+  border-radius: 12px;
+  line-height: 1;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: color 0.25s ease, opacity 0.35s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.navbar-link-back {
+  position: absolute;
+  inset: 0;
+  color: var(--white-2);
+  opacity: 0;
+  transform: rotateX(90deg);
+  transform-origin: center top;
+}
+
+.navbar-link-front {
+  transform: rotateX(0);
+  transform-origin: center bottom;
+}
+
+.navbar-link:hover .navbar-link-front,
+.navbar-link:focus-visible .navbar-link-front {
+  opacity: 0;
+  transform: rotateX(-90deg);
+}
+
+.navbar-link:hover .navbar-link-back,
+.navbar-link:focus-visible .navbar-link-back {
+  opacity: 1;
+  transform: rotateX(0);
+}
+
+.navbar-link:hover .navbar-link-glow,
+.navbar-link:focus-visible .navbar-link-glow,
+.navbar-link.active .navbar-link-glow {
+  opacity: 1;
+  transform: scale(1.8);
 }
 
 .navbar-link.active {
+  color: var(--orange-yellow-crayola);
+}
+
+.navbar-link.active .navbar-link-face {
   color: var(--orange-yellow-crayola);
 }
 
@@ -693,9 +791,15 @@ main {
   gap: 20px;
 }
 
+.service-top-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .service-spline-box {
   width: 100%;
-  min-height: 400px;
+  height: clamp(500px, 70vw, 560px);
   border-radius: 14px;
   background: var(--border-gradient-onyx);
   box-shadow: var(--shadow-2);
@@ -714,8 +818,10 @@ main {
 }
 
 spline-viewer {
+  display: block;
   width: 100%;
   height: 100%;
+  min-height: 100%;
 }
 
 spline-viewer::part(logo) {
@@ -760,7 +866,7 @@ spline-viewer::part(logo) {
   inset: 1px;
   background:
     radial-gradient(circle at 12% 0%, hsla(45, 100%, 72%, 0.045), transparent 27%),
-    radial-gradient(circle at 88% 12%, hsla(232, 92%, 72%, 0.08), transparent 30%),
+    radial-gradient(circle at 88% 12%, hsla(45, 100%, 72%, 0.055), transparent 30%),
     var(--bg-gradient-jet);
   border-radius: inherit;
   z-index: -1;
@@ -774,7 +880,7 @@ spline-viewer::part(logo) {
 .service-item:hover::before {
   background:
     radial-gradient(circle at 12% 0%, hsla(45, 100%, 72%, 0.07), transparent 28%),
-    radial-gradient(circle at 88% 12%, hsla(232, 92%, 72%, 0.11), transparent 32%),
+    radial-gradient(circle at 88% 12%, hsla(45, 100%, 72%, 0.075), transparent 32%),
     var(--bg-gradient-jet);
 }
 
@@ -825,7 +931,7 @@ spline-viewer::part(logo) {
 }
 
 .github-card {
-  border: 1px solid hsla(232, 92%, 72%, 0.16);
+  border: 1px solid hsla(45, 100%, 72%, 0.14);
 }
 
 .github-stat-grid {
@@ -2304,17 +2410,18 @@ textarea.form-input::-webkit-resizer {
     right: 0;
     width: max-content;
     border-radius: 0 20px;
-    padding: 0 20px;
+    padding: 0 10px;
     box-shadow: none;
   }
 
   .navbar-list {
-    gap: 30px;
-    padding: 0 20px;
+    gap: 8px;
+    padding: 8px 10px;
   }
 
-  .navbar-link {
-    font-weight: var(--fw-500);
+  .navbar-link-face {
+    min-width: 72px;
+    padding: 11px 12px;
   }
 
 
@@ -2326,21 +2433,31 @@ textarea.form-input::-webkit-resizer {
   /* service */
 
   .service-container {
-    display: grid;
-    grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.12fr);
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
   }
 
-  .service-list {
+  .service-top-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.12fr);
+    align-items: stretch;
+    gap: 25px;
+  }
+
+  .service-list-primary {
     grid-template-columns: 1fr;
-    gap: 20px 25px;
+    gap: 20px;
+  }
+
+  .service-list-wide {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
   }
 
   .service-spline-box {
-    height: clamp(720px, 86vh, 960px);
+    height: 100%;
     min-height: 720px;
-    position: sticky;
-    top: 110px;
   }
 
   /* testimonials */

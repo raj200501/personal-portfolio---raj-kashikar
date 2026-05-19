@@ -40,7 +40,7 @@
     let mouse = { x: -1000, y: -1000 };
 
     // Configuration
-    const color = "#818cf8"; // Indigo-400
+    const color = "#f6c85f"; // restrained portfolio gold
     const trailOpacity = 0.1;
     const particleCount = 600;
     const speed = 0.8;
@@ -174,7 +174,7 @@
       <div class="sidebar-info">
 
         <figure class="avatar-box">
-          <img src="./assets/images/raj-profile.png" alt="Raj Kashikar profile photo." width="80">
+          <img src="./assets/images/my-avatar.png" alt="Raj Kashikar profile photo." width="80">
         </figure>
 
         <div class="info-content">
@@ -224,7 +224,7 @@
             <div class="contact-info">
               <p class="contact-title">Phone</p>
 
-              <a href="tel:+9254369249" class="contact-link">+1 (925) 436-9249</a>
+              <button type="button" class="contact-link phone-reveal" data-phone-reveal>Reveal phone</button>
             </div>
 
           </li>
@@ -238,7 +238,7 @@
             <div class="contact-info">
               <p class="contact-title">Graduation Date</p>
 
-              <time datetime="2026-09-05">May 9, 2026</time>
+              <time datetime="2027-05">May 2027</time>
             </div>
 
           </li>
@@ -252,7 +252,7 @@
             <div class="contact-info">
               <p class="contact-title">Location</p>
 
-              <address>San Ramon, California, USA</address>
+              <address>SF Bay Area + New York City</address>
             </div>
 
           </li>
@@ -305,26 +305,56 @@
         <ul class="navbar-list">
 
           <li class="navbar-item">
-            <button class="navbar-link active" data-nav-link data-target="about">About</button>
+            <button class="navbar-link active" data-nav-link data-target="about" aria-label="About">
+              <span class="navbar-link-shell">
+                <span class="navbar-link-glow"></span>
+                <span class="navbar-link-face navbar-link-front">About</span>
+                <span class="navbar-link-face navbar-link-back" aria-hidden="true">About</span>
+              </span>
+            </button>
           </li>
 
           <li class="navbar-item">
             <a href="https://www.linkedin.com/in/raj-kashikar-6a76a9231" class="navbar-link" target="_blank"
-              rel="noopener noreferrer">Resume</a>
+              rel="noopener noreferrer" aria-label="Resume">
+              <span class="navbar-link-shell">
+                <span class="navbar-link-glow"></span>
+                <span class="navbar-link-face navbar-link-front">Resume</span>
+                <span class="navbar-link-face navbar-link-back" aria-hidden="true">Resume</span>
+              </span>
+            </a>
           </li>
 
           <li class="navbar-item">
             <a href="https://github.com/raj200501" class="navbar-link" target="_blank"
-              rel="noopener noreferrer">Projects</a>
+              rel="noopener noreferrer" aria-label="Projects">
+              <span class="navbar-link-shell">
+                <span class="navbar-link-glow"></span>
+                <span class="navbar-link-face navbar-link-front">Projects</span>
+                <span class="navbar-link-face navbar-link-back" aria-hidden="true">Projects</span>
+              </span>
+            </a>
           </li>
 
           <li class="navbar-item">
             <a href="https://scholar.google.com/citations?user=SYthplcAAAAJ&hl=en" class="navbar-link" target="_blank"
-              rel="noopener noreferrer">Research</a>
+              rel="noopener noreferrer" aria-label="Research">
+              <span class="navbar-link-shell">
+                <span class="navbar-link-glow"></span>
+                <span class="navbar-link-face navbar-link-front">Research</span>
+                <span class="navbar-link-face navbar-link-back" aria-hidden="true">Research</span>
+              </span>
+            </a>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link data-target="contact">Contact</button>
+            <button class="navbar-link" data-nav-link data-target="contact" aria-label="Contact">
+              <span class="navbar-link-shell">
+                <span class="navbar-link-glow"></span>
+                <span class="navbar-link-face navbar-link-front">Contact</span>
+                <span class="navbar-link-face navbar-link-back" aria-hidden="true">Contact</span>
+              </span>
+            </button>
           </li>
 
         </ul>
@@ -395,9 +425,10 @@
           <h3 class="h3 service-title">Core Work</h3>
 
           <div class="service-container">
-            <ul class="service-list">
+            <div class="service-top-grid">
+              <ul class="service-list service-list-primary">
 
-              <li class="service-item bento-card">
+                <li class="service-item bento-card">
                 <div class="service-stat" aria-hidden="true">4x</div>
                 <div class="service-content-box">
                   <h4 class="h4 service-item-title">SWE / AI</h4>
@@ -416,9 +447,9 @@
                     tooling, and production ML workflows.
                   </p>
                 </div>
-              </li>
+                </li>
 
-              <li class="service-item bento-card">
+                <li class="service-item bento-card">
                 <div class="service-stat" aria-hidden="true">3x</div>
                 <div class="service-content-box">
                   <h4 class="h4 service-item-title">Research Fellowships</h4>
@@ -437,9 +468,9 @@
                     systems, RF machine learning, and national-security ML.
                   </p>
                 </div>
-              </li>
+                </li>
 
-              <li class="service-item bento-card">
+                <li class="service-item bento-card">
                 <div class="service-stat" aria-hidden="true">8x</div>
                 <div class="service-content-box">
                   <h4 class="h4 service-item-title">Published ML Research</h4>
@@ -454,7 +485,18 @@
                     quantum/AI communication, and trustworthy ML.
                   </p>
                 </div>
-              </li>
+                </li>
+
+              </ul>
+
+              <div class="service-spline-box">
+                <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                  events-target="global" loading="eager"></spline-viewer>
+                <div class="spline-watermark-hider"></div>
+              </div>
+            </div>
+
+            <ul class="service-list service-list-wide">
 
               <li class="service-item bento-card">
                 <div class="service-stat" aria-hidden="true">2+5</div>
@@ -509,7 +551,7 @@
 
                   <a class="github-chart-link" href="https://github.com/raj200501" target="_blank"
                     rel="noopener noreferrer" aria-label="Open Raj Kashikar's GitHub contribution history">
-                    <img src="https://ghchart.rshah.org/818cf8/raj200501"
+                    <img src="https://ghchart.rshah.org/f6c85f/raj200501"
                       alt="GitHub contribution graph for Raj Kashikar." loading="lazy" referrerpolicy="no-referrer">
                   </a>
 
@@ -530,12 +572,6 @@
               </li>
 
             </ul>
-
-            <div class="service-spline-box">
-              <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                events-target="global"></spline-viewer>
-              <div class="spline-watermark-hider"></div>
-            </div>
           </div>
 
         </section>
