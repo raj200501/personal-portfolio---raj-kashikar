@@ -560,6 +560,18 @@ main {
   font-size: 18px;
 }
 
+.social-link-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  font-size: 0.82em;
+  font-weight: var(--fw-600);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
 
 .social-item .social-link:hover {
   color: var(--light-gray);
